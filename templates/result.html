@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Results</title>
+</head>
+<body>
+    <h1>Generated Response</h1>
+    <p>{{ response }}</p>
+
+    <h2>Relevant Text Excerpts</h2>
+    <ul>
+        {% for text in text %}
+        <li>{{ text }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Relevant Images</h2>
+    <ul>
+        {% for img in images %}
+        <li><img src="{{ img }}" alt="Relevant Image"></li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('index') }}">Go Back</a>
+</body>
+</html>

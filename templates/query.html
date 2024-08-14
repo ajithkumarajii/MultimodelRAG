@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask from the PDF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='query.css') }}">
+</head>
+<body>
+    <video autoplay muted loop id="backgroundVideo">
+        <source src="{{ url_for('static', filename='15185251-uhd_3840_2160_30fps.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="container">
+        <h1>Query Window</h1>
+        <form action="/query" method="post">
+            <label for="query">Integrated with llama3-70b Large Language Model</label>
+            <input type="text" name="query" id="query" placeholder="Ask your query here..." required>
+            <button type="submit">Submit</button>
+        </form>
+
+        <button><a href="{{ url_for('upload_file') }}" class="upload-button">Try with another pdf</a> </button>
+
+        {% if relevant_text or relevant_images %}
+            <div class="results">
+                <br><br><br>
+                <h2>{{ query }}</h2>
+                
+                <h3>Relevant Text:</h3>
+                <ul class="text-results">
+                    {% for text in relevant_text %}
+                        <li>{{ text }}</li>
+                    {% endfor %}
+                </ul>
+                
+                <h3>Relevant Images:</h3>
+                <ul class="image-results">
+                    {% for img in relevant_images %}
+                        <li><img src="{{ url_for('static', filename=img) }}" alt="Relevant Image"></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
